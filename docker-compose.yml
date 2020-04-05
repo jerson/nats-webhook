@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  webhook:
+    image: jerson/go:1.14
+    ports:
+      - 8080:8080
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+    entrypoint: sh
+  nats:
+    image: nats-streaming:latest
+    volumes:
+      - data:/data
+    command:
+      - "--cluster_id"
+      - "nats"
+      - "-store"
+      - "file"
+      - "-dir"
+      - "/data"
+    ports:
+      - 4222:4222
+
+volumes:
+  data:
