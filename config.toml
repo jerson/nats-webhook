@@ -1,6 +1,0 @@
-[api]
-key="oCsf466H24s86P7YuY2kB2X1SV2807"
-
-[nats]
-endpoint="nats://nats.jerson.dev:4222"
-cluster_id="nats"
