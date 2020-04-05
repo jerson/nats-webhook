@@ -20,7 +20,10 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	logrus.SetLevel(logrus.TraceLevel)
+
+	if config.Vars.Debug {
+		logrus.SetLevel(logrus.TraceLevel)
+	}
 }
 
 func main() {
@@ -76,10 +79,7 @@ func event(source, subject string, body []byte) error {
 		"source":  source,
 		"subject": subject,
 	})
-	if config.Vars.Debug {
-		log.Debug("New event", string(body))
-	}
-
+	log.Debug("New event", string(body))
 	cn, err := nats.Connect()
 	if err != nil {
 		log.Error(fmt.Errorf("connect error: %w", err))
@@ -104,9 +104,7 @@ func event(source, subject string, body []byte) error {
 		return err
 	}
 
-	if config.Vars.Debug {
-		log.Debug("Published")
-	}
+	log.Debug("Published")
 
 	return nil
 }
