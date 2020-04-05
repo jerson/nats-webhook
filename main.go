@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/rs/xid"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
+	"nats_webhook/entities"
 	"nats_webhook/modules/config"
 	"nats_webhook/modules/nats"
 	"net/http"
@@ -70,7 +72,7 @@ func eventHandler(w http.ResponseWriter, r *http.Request) {
 func event(source, subject string, body []byte) error {
 	guid := xid.New()
 	log := logrus.WithFields(logrus.Fields{
-		"id":      guid,
+		"id":      guid.String(),
 		"source":  source,
 		"subject": subject,
 	})
@@ -83,7 +85,20 @@ func event(source, subject string, body []byte) error {
 		log.Error(fmt.Errorf("connect error: %w", err))
 		return err
 	}
-	err = cn.Publish(subject, body)
+
+	payload := entities.Payload{
+		ID:      guid.String(),
+		Source:  source,
+		Subject: subject,
+		Body:    body,
+	}
+
+	data, err := json.Marshal(payload)
+	if err != nil {
+		log.Error(fmt.Errorf("payload error: %w", err))
+		return err
+	}
+	err = cn.Publish(subject, data)
 	if err != nil {
 		log.Warn(fmt.Errorf("publish error: %w", err))
 		return err
