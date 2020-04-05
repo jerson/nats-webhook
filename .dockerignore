@@ -1,0 +1,12 @@
+.idea
+config.toml
+/nats-webhook
+vendor/
+tmp/
+*.pprof
+*.memprof
+*.tmp
+*.bak
+*.tar.gz
+*.log
+*.pid
