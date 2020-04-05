@@ -29,3 +29,16 @@ registry-build:
 
 registry-push:
 	docker push $(REGISTRY):$(APP_VERSION)
+
+stop:
+	docker-compose stop
+
+dev:
+	docker-compose build
+	docker-compose up -d
+	clear
+	@echo ""
+	@echo "starting command line:"
+	@echo "** when finish exist and run: make stop**"
+	@echo ""
+	docker-compose exec webhook sh

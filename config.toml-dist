@@ -2,5 +2,5 @@
 key="change_this"
 
 [nats]
-endpoint="nats://localhost:4222"
-cluster_id="change"
+endpoint="nats://nats:4222"
+cluster_id="nats"
