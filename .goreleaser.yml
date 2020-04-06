@@ -25,7 +25,3 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
-release:
-  github:
-    owner: jerson
-    name: "Gerson Alexander Pardo Gamez"
