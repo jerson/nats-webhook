@@ -19,6 +19,7 @@ Later you can subscribe to any subject a usual its on `NATS streaming`
 package main
 import (
 	"fmt"
+  "time"
 	"github.com/nats-io/stan.go"
 )
 
@@ -37,6 +38,9 @@ func main(){
       panic(err)
     }
     defer sub.Unsubscribe()
+
+    // delay for wait some seconds... its not really required
+    time.Sleep(time.Second * 10)
 }
 ```
 
