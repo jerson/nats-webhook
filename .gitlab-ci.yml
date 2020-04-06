@@ -23,4 +23,4 @@ stages:
 webhook:
   stage: build
   script:
-    - docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -t $REGISTRY:$APP_VERSION -t $REGISTRY .
+    - docker buildx build --platform linux/amd64 --push -t $REGISTRY:$APP_VERSION -t $REGISTRY .
