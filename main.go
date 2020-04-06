@@ -42,6 +42,11 @@ func main() {
 func authMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+		if config.Vars.API.Key == "" {
+			next.ServeHTTP(w, r)
+			return
+		}
+
 		authorization := r.Header.Get("Authorization")
 		splitToken := strings.Split(authorization, "Bearer ")
 		if len(splitToken) > 1 && strings.TrimSpace(splitToken[1]) == config.Vars.API.Key {
@@ -85,6 +90,7 @@ func event(source, subject string, body []byte) error {
 		log.Error(fmt.Errorf("connect error: %w", err))
 		return err
 	}
+	defer cn.Close()
 
 	payload := entities.Payload{
 		ID:      guid.String(),

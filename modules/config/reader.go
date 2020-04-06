@@ -14,7 +14,7 @@ type Server struct {
 
 // API ...
 type API struct {
-	Key string `toml:"key" required:"true"`
+	Key string `toml:"key" default:""`
 }
 
 // NATS ...
