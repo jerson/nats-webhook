@@ -16,6 +16,12 @@ http://localhost:8080/event/{source}/{subject}
 Later you can subscribe to any subject a usual its on `NATS streaming`
 
 ```go
+
+import (
+	"fmt"
+	"github.com/nats-io/stan.go"
+)
+
 sc, err := stan.Connect("default", "itsme", stan.NatsURL("nats://localhost:4222"))
 if err != nil {
   return err
