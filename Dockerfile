@@ -1,6 +1,7 @@
 FROM jerson/go:1.14 AS builder
 
 ENV WORKDIR /app
+ENV GOPROXY https://goproxy.io
 WORKDIR ${WORKDIR}
 
 COPY go.mod go.sum Makefile ./
