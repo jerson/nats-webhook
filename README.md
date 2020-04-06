@@ -51,7 +51,7 @@ type Payload struct {
 You can use a `docker-compose.yml` like this
 
 ```yaml
-version: "3.7"
+version: "3"
 
 services:
   webhook:
