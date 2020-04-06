@@ -16,26 +16,28 @@ http://localhost:8080/event/{source}/{subject}
 Later you can subscribe to any subject a usual its on `NATS streaming`
 
 ```go
-
+package main
 import (
 	"fmt"
 	"github.com/nats-io/stan.go"
 )
 
-sc, err := stan.Connect("default", "itsme", stan.NatsURL("nats://localhost:4222"))
-if err != nil {
-  return err
+func main(){
+    sc, err := stan.Connect("default", "itsme", stan.NatsURL("nats://localhost:4222"))
+    if err != nil {
+      panic(err)
+    }
+    defer sc.Close()
+    
+    sub, err := sc.Subscribe("mysubject", func(m *stan.Msg) {
+      fmt.Printf("Hi: %s\n", string(m.Data))
+      m.Ack()
+    })
+    if err != nil {
+      panic(err)
+    }
+    defer sub.Unsubscribe()
 }
-defer sc.Close()
-
-sub, err := sc.Subscribe("mysubject", func(m *stan.Msg) {
-  fmt.Printf("Hi: %s\n", string(m.Data))
-  m.Ack()
-})
-if err != nil {
-  return err
-}
-defer sub.Unsubscribe()
 ```
 
 **IMPORTANT**: `m.Data` is json.Marshal of `Payload` struct
@@ -47,7 +49,6 @@ type Payload struct {
 	Subject string `json:"subject"`
 	Body    []byte `json:"body"`
 }
-
 ```
 
 ## Deploy
@@ -73,7 +74,7 @@ cluster_id="nats"
 
 #### Environments vars
 
-```env
+```bash
 export APP_SERVER_PORT=8080
 export APP_API_KEY=sampletoken
 export APP_NATS_ENDPOINT=nats://localhost:4222
@@ -91,7 +92,6 @@ You can use a `docker-compose.yml` like this
 
 ```yaml
 version: "3"
-
 services:
   webhook:
     image: registry.gitlab.com/pardacho/nats-webhook:latest

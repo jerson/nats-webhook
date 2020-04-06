@@ -11,7 +11,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@master
       - name: releaser
-        uses: docker://jerson/goreleaser:0.118
+        uses: docker://jerson/goreleaser:0.131
         env:
           GITHUB_TOKEN: ${{ secrets.GLOBAL_GITHUB_TOKEN }}
         with:
