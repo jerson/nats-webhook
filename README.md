@@ -44,7 +44,9 @@ type Payload struct {
 
 ```
 
-## deploy
+## Deploy
+
+### Docker
 
 You can use a `docker-stack.yml` like this
 
@@ -90,3 +92,9 @@ networks:
     external: true
   private:
 ```
+
+### Binaries
+
+just go to `Releases` section, download an run in your server
+
+<https://github.com/jerson/nats-webhook/releases>
