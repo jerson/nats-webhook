@@ -52,6 +52,39 @@ type Payload struct {
 
 ## Deploy
 
+### Config
+
+Before deploy you should know all vars, you have two options:
+
+#### config.toml
+
+```yaml
+[server]
+port=8080
+
+[api]
+key="sampletoken"
+
+[nats]
+endpoint="nats://localhost:4222"
+client_id="webhook"
+cluster_id="nats"
+```
+
+#### Environments vars
+
+```env
+export APP_SERVER_PORT=8080
+export APP_API_KEY=sampletoken
+export APP_NATS_ENDPOINT=nats://localhost:4222
+export APP_NATS_CLIENTID=webhook
+export APP_NATS_CLUSTERID=nats
+```
+
+### Authorization
+
+if you define `APP_API_KEY` env or `key="sampletoken"` in `config.toml` you should send `Authorization` header like this `Authorization: Bearer {sampletoken}`
+
 ### Docker
 
 You can use a `docker-compose.yml` like this
