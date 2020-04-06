@@ -127,7 +127,7 @@ just go to `Releases` section, download an run in your server
 
 <https://github.com/jerson/nats-webhook/releases>
 
-### Scrit
+### Script
 
 ```bash
 curl -sfL https://raw.githubusercontent.com/jerson/nats-webhook/master/install.sh | sh
