@@ -48,7 +48,7 @@ type Payload struct {
 
 ### Docker
 
-You can use a `docker-stack.yml` like this
+You can use a `docker-compose.yml` like this
 
 ```yaml
 version: "3.7"
@@ -61,9 +61,6 @@ services:
       - APP_NATS_ENDPOINT=nats://nats:4222
       - APP_NATS_CLUSTERID=default
       - APP_API_KEY=sampletoken
-    networks:
-      - private
-      - public
     ports:
       - 8080:8080
   nats:
@@ -79,18 +76,10 @@ services:
       - "/data"
       - "-p"
       - "4222"
-    networks:
-      - public
-      - private
     ports:
       - 4222:4222
 volumes:
   storage:
-
-networks:
-  public:
-    external: true
-  private:
 ```
 
 ### Binaries
