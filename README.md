@@ -59,7 +59,7 @@ Before deploy you should know all vars, you have two options:
 
 #### config.toml
 
-```yaml
+```toml
 [server]
 port=8080
 
