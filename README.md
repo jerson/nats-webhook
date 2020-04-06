@@ -28,7 +28,7 @@ func main(){
       panic(err)
     }
     defer sc.Close()
-    
+
     sub, err := sc.Subscribe("mysubject", func(m *stan.Msg) {
       fmt.Printf("Hi: %s\n", string(m.Data))
       m.Ack()
@@ -126,3 +126,9 @@ volumes:
 just go to `Releases` section, download an run in your server
 
 <https://github.com/jerson/nats-webhook/releases>
+
+### Scrit
+
+```bash
+curl -sfL https://raw.githubusercontent.com/jerson/nats-webhook/master/install.sh | sh
+```
